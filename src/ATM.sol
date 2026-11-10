@@ -24,12 +24,7 @@ contract ATM {
     /// @notice Take 1 token out of the machine.
     function withdraw() external {
         require(token.balanceOf(address(this)) >= WITHDRAW_AMOUNT, "ATM: out of cash");
-        require(token.transfer(msg.sender, WITHDRAW_AMOUNT), "ATM: transfer failed");
+        token.transfer(msg.sender, WITHDRAW_AMOUNT);
         emit Withdrawal(msg.sender, WITHDRAW_AMOUNT);
-    }
-
-    /// @notice How much cash is left in the machine?
-    function cashLeft() external view returns (uint256) {
-        return token.balanceOf(address(this));
     }
 }
